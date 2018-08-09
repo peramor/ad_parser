@@ -4,7 +4,10 @@ var url = "https://easylist-downloads.adblockplus.org/advblock.txt?&title=RU%20A
 var User = require('./user.model')
 var _ = require('lodash')
 
-setInterval(() => {
+check()
+setInterval(check, 5 * 60 * 1000)
+
+function check() {
   console.time('search')
   User.find()
     .then(users => {
@@ -26,11 +29,10 @@ setInterval(() => {
           }
         }
 
-        console.time('search')
+        console.timeEnd('search')
       })
-
     })
-}, 5*60*1000)
+}
 
 /**
  * Псевдо-функция отравки сообщения.

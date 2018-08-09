@@ -39,6 +39,10 @@ let user = new User({
   ]
 })
 
-user.save()
+user.save(err => {
+  if (err.code == 11000) // duplicate
+    return;
+  console.error(err)
+})
 
 module.exports = User;
